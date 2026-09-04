@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#0b0b0f">
+  <meta name="description" content="KAISOUL AI - Trợ lý AI">
+
+  <title>KAISOUL AI</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- =========================================================
+       SIDEBAR
+  ========================================================== -->
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-header">
+
+      <div class="brand">
+
+        <div class="brand-mark">K</div>
+
+        <div class="brand-info">
+          <div class="brand-name">KAISOUL AI</div>
+          <div class="brand-version">v1</div>
+        </div>
+
+      </div>
+
+      <button
+        id="closeSidebar"
+        class="icon-btn"
+        type="button"
+        aria-label="Đóng menu">
+        ×
+      </button>
+
+    </div>
+
+
+    <!-- NEW CHAT -->
+
+    <button
+      id="newChatBtn"
+      class="new-chat-btn"
+      type="button">
+
+      <span class="new-chat-icon">＋</span>
+      <span>Chat mới</span>
+
+    </button>
+
+
+    <!-- SEARCH -->
+
+    <div class="history-search">
+
+      <span class="search-icon">⌕</span>
+
+      <input
+        id="historySearch"
+        type="search"
+        placeholder="Tìm kiếm chat..."
+        autocomplete="off">
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="sidebar-section">
+
+      <div class="section-title">
+        Lịch sử chat
+      </div>
+
+      <div
+        id="historyList"
+        class="history-list"
+        aria-live="polite">
+
+        <!-- app.js render history -->
+
+      </div>
+
+      <div
+        id="historyEmpty"
+        class="history-empty">
+
+        Chưa có cuộc trò chuyện nào.
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-spacer"></div>
+
+
+    <!-- ACCOUNT -->
+
+    <div
+      id="accountCard"
+      class="account-card">
+
+      <div
+        id="accountAvatar"
+        class="account-avatar">
+
+        <span>K</span>
+
+      </div>
+
+      <div class="account-info">
+
+        <strong id="accountName">
+          Đang tải...
+        </strong>
+
+        <span id="accountUsername">
+          @username
+        </span>
+
+      </div>
+
+      <span
+        id="accountPlan"
+        class="plan-badge">
+        FREE
+      </span>
+
+    </div>
+
+
+    <!-- QUOTA -->
+
+    <div class="plan-card">
+
+      <div class="plan-top">
+
+        <div>
+          <span
+            id="planName"
+            class="plan-name">
+            KAISOUL FREE
+          </span>
+
+          <span
+            id="planStatus"
+            class="plan-status">
+            FREE
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="quota-label">
+
+        <span>Hạn mức hôm nay</span>
+
+        <strong id="quotaText">
+          -- / --
+        </strong>
+
+      </div>
+
+
+      <div class="quota-bar">
+
+        <div
+          id="quotaBar"
+          class="quota-progress">
+        </div>
+
+      </div>
+
+
+      <button
+        id="upgradeBtn"
+        class="upgrade-btn"
+        type="button">
+
+        Nâng cấp KAISOUL PRO 1
+
+      </button>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="sidebar-nav">
+
+      <button
+        type="button"
+        data-action="memory">
+
+        <span>◈</span>
+        <span>Bộ nhớ</span>
+
+      </button>
+
+
+      <button
+        type="button"
+        data-action="settings">
+
+        <span>⚙</span>
+        <span>Cài đặt</span>
+
+      </button>
+
+
+      <button
+        type="button"
+        data-action="account">
+
+        <span>○</span>
+        <span>Tài khoản KAISOUL ID</span>
+
+      </button>
+
+    </nav>
+
+  </aside>
+
+
+  <!-- SIDEBAR OVERLAY -->
+
+  <div
+    id="sidebarOverlay"
+    class="sidebar-overlay">
+  </div>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <button
+        id="menuBtn"
+        class="icon-btn"
+        type="button"
+        aria-label="Mở menu">
+
+        ☰
+
+      </button>
+
+
+      <div class="topbar-title">
+
+        <div
+          id="chatTitle"
+          class="chat-title">
+
+          Chat mới
+
+        </div>
+
+
+        <div class="ai-status">
+
+          <span class="status-dot"></span>
+
+          KAISOUL AI
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="moreBtn"
+        class="icon-btn"
+        type="button"
+        aria-label="Tùy chọn chat">
+
+        ⋮
+
+      </button>
+
+    </header>
+
+
+    <!-- =======================================================
+         CHAT
+    ======================================================== -->
+
+    <section
+      id="chatContainer"
+      class="chat-container">
+
+
+      <!-- EMPTY / WELCOME -->
+
+      <div
+        id="welcomeScreen"
+        class="welcome-screen">
+
+        <div class="welcome-logo">
+          K
+        </div>
+
+
+        <h1>
+          KAISOUL AI
+        </h1>
+
+
+        <p class="welcome-description">
+
+          Trợ lý AI cho viết lách, lập trình,
+          toán học, phân tích và nhiều tác vụ khác.
+
+        </p>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="quick-grid">
+
+
+          <button
+            class="quick-card"
+            type="button"
+            data-prompt="Giải thích vấn đề này thật dễ hiểu.">
+
+            <span class="quick-icon">✦</span>
+
+            <strong>
+              Giải thích
+            </strong>
+
+            <small>
+              Hiểu một vấn đề
+            </small>
+
+          </button>
+
+
+          <button
+            class="quick-card"
+            type="button"
+            data-prompt="Viết giúp tôi nội dung này một cách chuyên nghiệp.">
+
+            <span class="quick-icon">✎</span>
+
+            <strong>
+              Viết
+            </strong>
+
+            <small>
+              Tạo nội dung
+            </small>
+
+          </button>
+
+
+          <button
+            class="quick-card"
+            type="button"
+            data-prompt="Giúp tôi viết và giải thích đoạn code này.">
+
+            <span class="quick-icon">&lt;/&gt;</span>
+
+            <strong>
+              Lập trình
+            </strong>
+
+            <small>
+              Viết và sửa code
+            </small>
+
+          </button>
+
+
+          <button
+            class="quick-card"
+            type="button"
+            data-prompt="Giải bài toán này và giải thích từng bước.">
+
+            <span class="quick-icon">∑</span>
+
+            <strong>
+              Toán</strong>
+
+            <small>
+              Giải bài toán
+            </small>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- MESSAGES -->
+
+      <div
+        id="messages"
+        class="messages"
+        aria-live="polite">
+      </div>
+
+
+      <!-- TYPING -->
+
+      <div
+        id="typingIndicator"
+        class="typing-indicator hidden">
+
+        <div class="message-avatar">
+          K
+        </div>
+
+        <div class="typing-content">
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <span class="typing-text">
+            Đang suy nghĩ...
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- OFFLINE -->
+
+      <div
+        id="offlineState"
+        class="offline-state hidden">
+
+        <span>Không có kết nối mạng.</span>
+
+        <button
+          id="retryConnectionBtn"
+          type="button">
+
+          Thử lại
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         COMPOSER
+    ======================================================== -->
+
+    <footer class="composer-area">
+
+
+      <!-- FILE PREVIEW -->
+
+      <div
+        id="filePreview"
+        class="file-preview hidden">
+
+        <!-- app.js render files -->
+
+      </div>
+
+
+      <!-- INPUT -->
+
+      <div class="composer">
+
+
+        <button
+          id="attachBtn"
+          class="composer-btn"
+          type="button"
+          aria-label="Đính kèm file">
+
+          ＋
+
+        </button>
+
+
+        <input
+          id="fileInput"
+          type="file"
+          hidden
+          multiple
+          accept=".txt,.json,.js,.html,.css,.pdf,image/*">
+
+
+        <textarea
+          id="messageInput"
+          rows="1"
+          maxlength="10000"
+          placeholder="Nhắn tin với KAISOUL AI..."
+          autocomplete="off"></textarea>
+
+
+        <!-- STOP -->
+
+        <button
+          id="stopBtn"
+          class="stop-btn hidden"
+          type="button"
+          aria-label="Dừng AI">
+
+          ■
+
+        </button>
+
+
+        <!-- SEND -->
+
+        <button
+          id="sendBtn"
+          class="send-btn"
+          type="button"
+          aria-label="Gửi">
+
+          ↑
+
+        </button>
+
+      </div>
+
+
+      <!-- COMPOSER INFO -->
+
+      <div class="composer-bottom">
+
+        <span>
+          Enter để gửi · Shift + Enter để xuống dòng
+        </span>
+
+        <span id="messageCounter">
+          0 / 10000
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- =========================================================
+       CHAT MORE MENU
+  ========================================================== -->
+
+  <div
+    id="moreMenu"
+    class="popup-menu hidden">
+
+    <button
+      type="button"
+      data-more="rename">
+
+      Đổi tên chat
+
+    </button>
+
+
+    <button
+      type="button"
+      data-more="regenerate">
+
+      Tạo lại câu trả lời
+
+    </button>
+
+
+    <button
+      type="button"
+      data-more="clear">
+
+      Xóa cuộc trò chuyện
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================================================
+       SETTINGS MODAL
+  ========================================================== -->
+
+  <div
+    id="settingsModal"
+    class="modal hidden">
+
+    <div
+      class="modal-backdrop"
+      data-close="settings">
+    </div>
+
+
+    <div class="modal-box">
+
+
+      <div class="modal-header">
+
+        <h2>
+          Cài đặt
+        </h2>
+
+        <button
+          class="modal-close"
+          type="button"
+          data-close="settings">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div class="settings-list">
+
+
+        <div class="setting-item">
+
+          <div>
+
+            <strong>
+              Giao diện
+            </strong>
+
+            <small>
+              Dark, Light hoặc theo hệ thống
+            </small>
+
+          </div>
+
+
+          <select id="themeSelect">
+
+            <option value="dark">
+              Tối
+            </option>
+
+            <option value="light">
+              Sáng
+            </option>
+
+            <option value="system">
+              Theo hệ thống
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="setting-item">
+
+          <div>
+
+            <strong>
+              Thông báo
+            </strong>
+
+            <small>
+              Thông báo khi AI hoàn thành
+            </small>
+
+          </div>
+
+
+          <label class="switch">
+
+            <input
+              id="notificationToggle"
+              type="checkbox">
+
+            <span></span>
+
+          </label>
+
+        </div>
+
+
+        <div class="setting-item">
+
+          <div>
+
+            <strong>
+              Memory
+            </strong>
+
+            <small>
+              Cho phép KAISOUL AI sử dụng bộ nhớ
+            </small>
+
+          </div>
+
+
+          <label class="switch">
+
+            <input
+              id="memoryToggle"
+              type="checkbox"
+              checked>
+
+            <span></span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       MEMORY MODAL
+  ========================================================== -->
+
+  <div
+    id="memoryModal"
+    class="modal hidden">
+
+    <div
+      class="modal-backdrop"
+      data-close="memory">
+    </div>
+
+
+    <div class="modal-box">
+
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>
+            Bộ nhớ
+          </h2>
+
+          <small>
+            Những thông tin bạn cho phép KAISOUL AI ghi nhớ.
+          </small>
+
+        </div>
+
+
+        <button
+          class="modal-close"
+          type="button"
+          data-close="memory">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div
+        id="memoryList"
+        class="memory-list">
+
+        <!-- app.js render memory -->
+
+      </div>
+
+
+      <div
+        id="memoryEmpty"
+        class="memory-empty">
+
+        Chưa có memory nào.
+
+      </div>
+
+
+      <div class="memory-footer">
+
+        <button
+          id="clearMemoryBtn"
+          class="danger-btn"
+          type="button">
+
+          Xóa toàn bộ memory
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PRO MODAL
+  ========================================================== -->
+
+  <div
+    id="proModal"
+    class="modal hidden">
+
+    <div
+      class="modal-backdrop"
+      data-close="pro">
+    </div>
+
+
+    <div class="modal-box pro-box">
+
+
+      <button
+        class="modal-close"
+        type="button"
+        data-close="pro">
+
+        ×
+
+      </button>
+
+
+      <div class="pro-logo">
+        K
+      </div>
+
+
+      <h2>
+        KAISOUL PRO 1
+      </h2>
+
+
+      <p>
+        Nâng cấp để có hạn mức cao hơn
+        và mở khóa các tính năng nâng cao.
+      </p>
+
+
+      <div class="pro-features">
+
+        <div>
+          ✓ Quota cao hơn
+        </div>
+
+        <div>
+          ✓ Câu trả lời dài hơn
+        </div>
+
+        <div>
+          ✓ Ưu tiên xử lý
+        </div>
+
+        <div>
+          ✓ Phân tích file
+        </div>
+
+        <div>
+          ✓ Phân tích hình ảnh
+        </div>
+
+        <div>
+          ✓ Memory nâng cao
+        </div>
+
+      </div>
+
+
+      <div class="pro-price">
+
+        <span>
+          KAISOUL PRO 1
+        </span>
+
+        <strong>
+          Đang cập nhật
+        </strong>
+
+      </div>
+
+
+      <button
+        id="proContinueBtn"
+        class="pro-btn"
+        type="button">
+
+        Tiếp tục
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       ACCOUNT MODAL
+  ========================================================== -->
+
+  <div
+    id="accountModal"
+    class="modal hidden">
+
+    <div
+      class="modal-backdrop"
+      data-close="account">
+    </div>
+
+
+    <div class="modal-box">
+
+
+      <div class="modal-header">
+
+        <h2>
+          KAISOUL ID
+        </h2>
+
+
+        <button
+          class="modal-close"
+          type="button"
+          data-close="account">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div class="account-profile">
+
+        <div
+          id="profileAvatar"
+          class="profile-avatar">
+
+          K
+
+        </div>
+
+
+        <strong id="profileName">
+          Đang tải...
+        </strong>
+
+
+        <span id="profileUsername">
+          @username
+        </span>
+
+
+        <div class="kaisoul-id-box">
+
+          <small>
+            KAISOUL ID
+          </small>
+
+          <strong id="profileKaisoulId">
+            Đang tải...
+          </strong>
+
+        </div>
+
+
+        <div class="account-linked">
+
+          <span class="linked-dot"></span>
+
+          Đã liên kết KAISOUL ID
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       CONFIRM MODAL
+  ========================================================== -->
+
+  <div
+    id="confirmModal"
+    class="modal hidden">
+
+    <div
+      class="modal-backdrop">
+    </div>
+
+
+    <div class="modal-box confirm-box">
+
+      <h2 id="confirmTitle">
+        Xác nhận
+      </h2>
+
+      <p id="confirmMessage">
+        Bạn có chắc chắn muốn thực hiện thao tác này?
+      </p>
+
+
+      <div class="confirm-actions">
+
+        <button
+          id="confirmCancel"
+          type="button">
+
+          Hủy
+
+        </button>
+
+
+        <button
+          id="confirmOk"
+          class="danger-btn"
+          type="button">
+
+          Xác nhận
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       TOAST
+  ========================================================== -->
+
+  <div
+    id="toast"
+    class="toast hidden"
+    role="status"
+    aria-live="polite">
+
+    <span id="toastMessage"></span>
+
+  </div>
+
+
+  <!-- =========================================================
+       ERROR BOUNDARY
+  ========================================================== -->
+
+  <div
+    id="errorOverlay"
+    class="error-overlay hidden">
+
+    <div class="error-box">
+
+      <div class="error-icon">
+        !
+      </div>
+
+
+      <h2>
+        KAISOUL AI gặp lỗi
+      </h2>
+
+
+      <p id="errorText">
+        Ứng dụng không thể tiếp tục hoạt động.
+      </p>
+
+
+      <button
+        id="reloadBtn"
+        type="button">
+
+        Tải lại
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     APP SCRIPT
+========================================================== -->
+
+<script src="app.js"></script>
+
+
+<!-- =========================================================
+     FRONTEND ERROR BOUNDARY
+========================================================== -->
+
+<script>
+
+  window.addEventListener("error", function (event) {
+
+    const overlay =
+      document.getElementById("errorOverlay");
+
+    const text =
+      document.getElementById("errorText");
+
+    if (!overlay) return;
+
+    overlay.classList.remove("hidden");
+
+    if (text) {
+
+      text.textContent =
+        event.error?.message ||
+        "Đã xảy ra lỗi JavaScript.";
+
+    }
+
+  });
+
+
+  window.addEventListener(
+    "unhandledrejection",
+    function (event) {
+
+      const overlay =
+        document.getElementById("errorOverlay");
+
+      const text =
+        document.getElementById("errorText");
+
+      if (!overlay) return;
+
+      overlay.classList.remove("hidden");
+
+      if (text) {
+
+        text.textContent =
+          event.reason?.message ||
+          "Đã xảy ra lỗi khi xử lý yêu cầu.";
+
+      }
+
+    }
+  );
+
+
+  document
+    .getElementById("reloadBtn")
+    ?.addEventListener("click", function () {
+
+      window.location.reload();
+
+    });
+
+
+  /*
+    Offline detection.
+  */
+
+  function updateOnlineState() {
+
+    const offline =
+      document.getElementById("offlineState");
+
+    if (!offline) return;
+
+    if (navigator.onLine) {
+
+      offline.classList.add("hidden");
+
+    } else {
+
+      offline.classList.remove("hidden");
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    "online",
+    updateOnlineState
+  );
+
+  window.addEventListener(
+    "offline",
+    updateOnlineState
+  );
+
+  updateOnlineState();
+
+</script>
+
+</body>
+      </html>
